@@ -3,18 +3,7 @@ import logo from "../assets/logo.jpg";
 import { useSelector } from "react-redux";
 
 import Modal from "@mui/material/Modal";
-
-// const style = {
-//   position: "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-//   width: 400,
-//   bgcolor: "background.paper",
-//   border: "2px solid #000",
-//   boxShadow: 24,
-//   p: 4,
-// };
+import CartItem from "./CartItem";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -22,27 +11,30 @@ const Header = () => {
   const handleClose = () => setOpen(false);
   const amount = useSelector((state) => state.cart.amount);
   return (
-    <header id="main-header">
-      <div id="title">
-        <img src={logo} alt="" />
-        <h1>ReactFood</h1>
-      </div>
+    <>
+      <header id="main-header">
+        <div id="title">
+          <img src={logo} alt="" />
+          <h1>ReactFood</h1>
+        </div>
 
-      <nav>
-        <button onClick={handleOpen}>Cart ({amount})</button>
-      </nav>
+        <nav>
+          <button onClick={handleOpen}>Cart ({amount})</button>
+        </nav>
+      </header>
       <div>
-        <Modal
-          className="modal"
-          open={open}
-          onClose={handleClose}
-          // aria-labelledby="modal-modal-title"
-          // aria-describedby="modal-modal-description"
-        >
-          <h3>monju</h3>
+        <Modal className="modal" open={open} onClose={handleClose}>
+          <div className="cart">
+            <h2>Your Shopping Cart</h2>
+            <ul>
+              <CartItem
+                item={{ title: "Test Item", quantity: 3, total: 18, price: 6 }}
+              />
+            </ul>
+          </div>
         </Modal>
       </div>
-    </header>
+    </>
   );
 };
 

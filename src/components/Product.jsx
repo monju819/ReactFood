@@ -1,6 +1,9 @@
 import React from "react";
-
+import { useDispatch } from "react-redux";
+import { addTocart } from "../slices/cartSlice";
 const Product = ({ name, price, image, description }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="meal-item">
       <article>
@@ -11,7 +14,9 @@ const Product = ({ name, price, image, description }) => {
           <p className="meal-item-description">{description}</p>
         </div>
         <p className="meal-item-actions">
-          <button>Add To Cart</button>
+          <button onClick={() => dispatch(addTocart({ image, name, price }))}>
+            Add To Cart
+          </button>
         </p>
       </article>
     </div>
