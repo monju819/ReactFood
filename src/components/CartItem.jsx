@@ -1,27 +1,27 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const CartItem = (props) => {
-  const { title, quantity, total, price } = props.item;
-  return (
+  // const { total, price } = props.item;
+  const cartItem = useSelector((state) => state.cart.items);
+  return cartItem.map((item) => (
     <li className="item">
       <header>
-        <h3>{title}</h3>
+        <h3>{item.name}</h3>
         <div className="price">
-          ${total.toFixed(2)}{" "}
-          <span className="itemprice">(${price.toFixed(2)}/item)</span>
+          {/* ${total.toFixed(2)}{" "} */}
+          {/* <span className="itemprice">(${price.toFixed(2)}/item)</span> */}$
+          {item.price}
         </div>
       </header>
       <div className="details">
-        <div className="quantity">
-          x <span>{quantity}</span>
-        </div>
+        <img src={item.image} alt="" />
         <div className="actions">
-          <button>-</button>
-          <button>+</button>
+          <button>Remove</button>
         </div>
       </div>
     </li>
-  );
+  ));
 };
 
 export default CartItem;
